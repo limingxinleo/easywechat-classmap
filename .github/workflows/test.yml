@@ -13,13 +13,8 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        php-version: [ '7.3', '7.4', '8.0' ]
+        php-version: [ '8.0', '8.1' ]
         engine: [ 'none', 'swoole', 'swow' ]
-        exclude:
-          - php-version: '7.3'
-            engine: 'swow'
-          - php-version: '7.4'
-            engine: 'swow'
       max-parallel: 5
     steps:
       - name: Checkout

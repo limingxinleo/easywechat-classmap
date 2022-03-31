@@ -1,5 +1,5 @@
-# component-creator
+# EasyWeChat ClassMap
 
 ```
-composer create-project hyperf/component-creator
+composer require limingxinleo/easywechat-classmap
 ```
