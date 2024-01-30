@@ -36,6 +36,7 @@ class HttpClient implements HttpClientInterface
 
     public function withOptions(array $options): static
     {
+        $this->option = array_replace($this->option, $options);
         $client = $this->client()->withOptions($options);
         Context::set(static::class, $client);
         return $this;
