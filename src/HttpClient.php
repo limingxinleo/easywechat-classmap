@@ -38,14 +38,19 @@ class HttpClient implements HttpClientInterface
     {
         $this->option = array_replace($this->option, $options);
         $client = $this->client()->withOptions($options);
-        Context::set(static::class, $client);
+        Context::set($this->contextKey(), $client);
         return $this;
     }
 
     protected function client(): HttpClientInterface
     {
-        return Context::getOrSet(static::class, function () {
+        return Context::getOrSet($this->contextKey(), function () {
             return SymfonyClient::create(RequestUtil::formatDefaultOptions($this->option));
         });
+    }
+
+    protected function contextKey(): string
+    {
+        return sprintf('%s:%s', static::class, md5(json_encode($this->option, JSON_THROW_ON_ERROR)));
     }
 }
