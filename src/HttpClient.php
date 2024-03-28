@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace Fan\EasyWeChat;
 
 use EasyWeChat\Kernel\HttpClient\RequestUtil;
@@ -29,7 +30,7 @@ class HttpClient implements HttpClientInterface
         return $this->client()->request($method, $url, $options);
     }
 
-    public function stream(iterable|ResponseInterface $responses, float $timeout = null): ResponseStreamInterface
+    public function stream(iterable|ResponseInterface $responses, ?float $timeout = null): ResponseStreamInterface
     {
         return $this->client()->stream($responses, $timeout);
     }

@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace EasyWeChat\Kernel\Traits;
 
 use Fan\EasyWeChat\HttpClient;
