@@ -67,6 +67,6 @@ class HttpClient implements HttpClientInterface
 
     protected function contextKey(): string
     {
-        return sprintf('%s:%s', static::class, md5(json_encode($this->option, JSON_THROW_ON_ERROR)));
+        return sprintf('%s:%s', static::class, $this->option['base_uri'] ?? 'default');
     }
 }
