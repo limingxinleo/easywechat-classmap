@@ -21,12 +21,27 @@ use Symfony\Contracts\HttpClient\ResponseStreamInterface;
 
 class HttpClient implements HttpClientInterface
 {
+    public static array $hooks = [
+        'request' => [],
+    ];
+
     public function __construct(protected array $option = [])
     {
     }
 
     public function request(string $method, string $url, array $options = []): ResponseInterface
     {
+        $hooks = self::$hooks['request'] ?? [];
+        foreach ($hooks as $hook) {
+            if ($hook instanceof \Closure) {
+                if (($res = $hook($method, $url, $options)) && $res instanceof HookResult) {
+                    $method = $res->method;
+                    $url = $res->url;
+                    $options = $res->options;
+                }
+            }
+        }
+
         return $this->client()->request($method, $url, $options);
     }
 
